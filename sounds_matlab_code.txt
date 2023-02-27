@@ -1,0 +1,30 @@
+n=1;
+p1='';
+waitt=1;
+r=serial('COM3','BaudRate',9600);
+fopen(r);
+
+while(n==1)
+    
+    set(r, 'Timeout',5);
+    p= fgets(r);
+    
+    if strcmp(p,'H')
+        [y, Fs] = audioread('Holiday.mp3'); 
+        sound(y, Fs);
+        pause(10)
+        clear sound;
+    end
+    
+    if strcmp(p,'O')
+        [y, Fs] = audioread('OFF.mp3'); 
+        sound(y, Fs);
+        pause(10)
+        clear sound;
+    end
+    
+ end
+ fclose(r);                        %--close the serial port when done
+ delete(r);			
+ clear r;
+   
